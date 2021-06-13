@@ -9,7 +9,7 @@ var numberChar;
 var specialChar;
 var availableCharacters;
 
-//arrays
+//arrays of possible characters
 numArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",];
 upperArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"];
 lowerArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; 
@@ -41,7 +41,8 @@ function generatePassword() {
         lowerCase = confirm("Will your password include lowercase characters?");
         upperCase = confirm("Will your password include uppercase characters?");
       } 
-      //variable to hold array of available characters, if character type is true initial arrays are merged into 'availableCharacters' using concat method
+      //variable to hold array of available characters, if character type is true initial arrays are merged into 'availableCharacters' 
+      //using concat method
     availableCharacters = []
       
     if (specialChar) {
@@ -57,18 +58,19 @@ function generatePassword() {
       availableCharacters = availableCharacters.concat(upperArray)
     }
     
-      // Empty string to be filled based on for loop selecting random characters from the array
+      // for loop runs as many times as the number of characters selected by the user, it selects a random character from the full array 
+      //of available characters that was created and adds it to the generated password until the variable i is = numCharacters
+      //this produces a password that meets the user selected criteria
+
       var generatedPassword = ""
       
       for (var i = 0; i < numCharacters; i++) {
         generatedPassword = generatedPassword + availableCharacters[Math.floor(Math.random() * availableCharacters.length)];
-        console.log(generatedPassword)
       }
       return generatedPassword; 
 }
 
-// Write password to the #password input
-
+// provided writePassword function writes password to textarea id=password after the generatePassword returns value
   function writePassword() {
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
